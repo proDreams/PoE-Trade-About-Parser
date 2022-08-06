@@ -2,9 +2,13 @@ from selenium import webdriver
 import time
 import pickle
 
+options = webdriver.ChromeOptions()
+options.headless = True
 url_en = 'https://www.pathofexile.com/trade/about'
 url_ru = 'https://ru.pathofexile.com/trade/about'
-driver = webdriver.Chrome(executable_path='.\\chromedriver.exe')
+driver = webdriver.Chrome(executable_path='.\\chromedriver.exe', options=options)
+
+
 
 
 def parsing(url):
@@ -28,13 +32,17 @@ def parsing(url):
                 item_name = item.find_element('class name', 'filter-title').get_attribute('textContent').strip()
                 item_alt_name = item.find_element('class name', 'form-control').get_attribute('value')
                 result_dic[text].update({item_name: item_alt_name})
+        print('Please wait...')
     return result_dic
 
 
+print('Start parsing English site')
 with open('bd_en.pkl', 'wb') as f:
     pickle.dump(parsing(url_en), f)
+print('Start parsing Russian site')
 with open('bd_ru.pkl', 'wb') as f:
     pickle.dump(parsing(url_ru), f)
+print('Parsing complite')
 time.sleep(5)
 driver.close()
 driver.quit()
