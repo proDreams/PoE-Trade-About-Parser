@@ -1,14 +1,13 @@
 from selenium import webdriver
 import time
 import pickle
+from multiprocessing import Pool
 
 options = webdriver.ChromeOptions()
 options.headless = True
 url_en = 'https://www.pathofexile.com/trade/about'
 url_ru = 'https://ru.pathofexile.com/trade/about'
 driver = webdriver.Chrome(executable_path='.\\chromedriver.exe', options=options)
-
-
 
 
 def parsing(url):
