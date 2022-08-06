@@ -1,7 +1,6 @@
 from selenium import webdriver
 import time
 import pickle
-from multiprocessing import Pool
 
 options = webdriver.ChromeOptions()
 options.headless = True
