@@ -8,3 +8,4 @@
 ```
 pip install selenium
 ```
+## Так же в код программы, вместо *"Enter your POESESSID"* нужно прописать ваш *POESESSID*.
