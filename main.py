@@ -8,9 +8,10 @@ url_en = 'https://www.pathofexile.com/trade/about'
 url_ru = 'https://ru.pathofexile.com/trade/about'
 driver = webdriver.Chrome(executable_path='.\\chromedriver.exe', options=options)
 
-
 def parsing(url):
     global text
+    driver.get(url=url)
+    driver.add_cookie({"name": "POESESSID", "domain": ".pathofexile.com", "value": ""})
     driver.get(url=url)
     time.sleep(5)
     first_element = driver.find_element('xpath', '//*[@id="trade"]/div[4]/div[1]/div[2]')
