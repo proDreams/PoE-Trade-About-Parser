@@ -8,10 +8,11 @@ url_en = 'https://www.pathofexile.com/trade/about'
 url_ru = 'https://ru.pathofexile.com/trade/about'
 driver = webdriver.Chrome(executable_path='.\\chromedriver.exe', options=options)
 
+
 def parsing(url):
     global text
     driver.get(url=url)
-    driver.add_cookie({"name": "POESESSID", "domain": ".pathofexile.com", "value": "Enter your POESESSID"})
+    driver.add_cookie({"name": "POESESSID", "domain": ".pathofexile.com", "value": "ENTER POESESSID"})
     driver.get(url=url)
     time.sleep(5)
     first_element = driver.find_element('xpath', '//*[@id="trade"]/div[4]/div[1]/div[2]')
@@ -30,6 +31,8 @@ def parsing(url):
             for item in second_elements:
                 item_name = item.find_element('class name', 'filter-title').get_attribute('textContent').strip()
                 item_alt_name = item.find_element('class name', 'form-control').get_attribute('value')
+                if 'whispering' in item_alt_name or 'muttering' in item_alt_name or 'weeping' in item_alt_name or 'wailing' in item_alt_name or 'screaming' in item_alt_name:
+                    continue
                 result_dic[text].update({item_name: item_alt_name})
         print('Please wait...')
     return result_dic
